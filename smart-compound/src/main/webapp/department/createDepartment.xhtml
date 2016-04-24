@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+
+<script >
+    function handleCreateRequest() {
+        if(departmentName!=null ) {
+        
+            PF('createDepartment').hide();
+         
+        }
+    }
+</script>
+</h:head>
+<h:body>
+
+
+ 
+<p:commandButton value="New department" onclick="PF('createDepartment').show();"/>	
+		
+ 		<p:growl id="growl" sticky="true" showDetail="true" life="3000" /> 
+		
+ 
+	<h:form>
+	
+			<p:dialog header="create new department" widgetVar="createDepartment" resizable="false" model="true" >
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="DepartmentName" value="Department Name:" />
+				<p:inputText id="departmentName" required="true" label="departmentName" value="#{departmentBean.department.departmentName}"/>
+			
+				<f:facet name="footer">
+					<p:commandButton value="create" update="growl" actionListener="#{departmentBean.createDepartment()}" oncomplete="PF('createDepartment').hide();"  />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+
+</html>
