@@ -56,9 +56,9 @@ public class SmartCompoundManagmentImpl implements SmartCompoundManagment {
 	}
 
 	@Override
-	public void saveOrUpdateEmployee(Employee employee) {
+	public void updateEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		employeeService.saveOrUpdateEmployee(employee);
+		employeeService.updateEmployee(employee);
 
 	}
 

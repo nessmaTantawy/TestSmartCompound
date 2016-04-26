@@ -12,6 +12,6 @@ public interface EmployeeDAO {
 
 	Employee insertEmployee(Employee employee);
 
-	Employee saveOrUpdateEmployee(Employee employee);
+	Employee updateEmployee(Employee employee);
 
 }

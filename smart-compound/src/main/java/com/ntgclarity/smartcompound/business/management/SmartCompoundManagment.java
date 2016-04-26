@@ -22,6 +22,6 @@ public interface SmartCompoundManagment {
 
 	Department insertDepartment(Department department);
 
-	void saveOrUpdateEmployee(Employee employee);
+	void updateEmployee(Employee employee);
 
 }

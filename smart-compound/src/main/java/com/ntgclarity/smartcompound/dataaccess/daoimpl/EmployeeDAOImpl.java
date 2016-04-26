@@ -22,9 +22,9 @@ public class EmployeeDAOImpl extends BaseDAO implements EmployeeDAO {
 		return  (Employee) super.get(Employee.class , id);
 	}
 	@Override
-	public Employee saveOrUpdateEmployee(Employee employee) {
+	public Employee updateEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		return (Employee) super.saveOrUpdate(employee);
+		return (Employee) super.update(employee);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class EmployeeDAOImpl extends BaseDAO implements EmployeeDAO {
 	@Override
 	public Employee insertEmployee(Employee employee) {
 		
-		return (Employee) super.saveOrUpdate(employee);
+		return (Employee) super.update(employee);
 		
 		
 	}

@@ -27,6 +27,11 @@ public abstract class BaseDAO {
 		getCurrentSession().persist(entity);
 		return entity;
 	}
+	public Object update(Object entity) {
+		getCurrentSession().saveOrUpdate(entity);
+		return entity;
+	}
+
 
 	public List getAll(Class cls) {
 		Query query = getCurrentSession().createQuery(

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+
+
+</h:head>
+<h:body>
+	<h:messages globalOnly="true" />
+	<p:commandButton value="search Employee"
+		onclick="PF('searchEmployee').show();" />
+
+	<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+	<h:form>
+
+		<p:dialog header="create new employee" widgetVar="searchEmployee"
+			resizable="false" model="true">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="employeeId" value="Employee ID:" />
+				<p:inputText id="employeeId" required="true" label="employeeId"
+					binding="#{empID}" />
+
+				<f:facet name="footer">
+					<p:commandButton value="create" update="growl"
+						actionListener="#{employeeBean.getEmployee(empID.value)}"
+						oncomplete="PF('searchEmployee').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+		<p:dialog header="Result" widgetVar="foundDialog" resizable="false"
+			model="true">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel>Employee Found</p:outputLabel>
+			<!--  <h:outputLabel for="employeeName" value="Employee Name:" />
+				<p:inputText id="employeeName" required="true" label="employeeName"
+					value="#{employeeBean.selectedEmployee.name}" />
+				<p:inputText
+					value="#{employeeBean.selectedEmployee.deptId.departmentName}"/>-->
+				<p:commandButton value="OK" update="growl"
+					oncomplete="PF('foundDialog').hide();" />
+			</h:panelGrid>
+		</p:dialog>
+		<p:dialog header="Result" widgetVar="notFoundDialog" resizable="false"
+			model="true">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel>Employee Not Found</p:outputLabel>
+				<p:commandButton value="OK" update="growl"
+					oncomplete="PF('notFoundDialog').hide();" />
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+</h:body>
+</html>

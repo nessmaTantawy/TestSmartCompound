@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.context.RequestContext;
@@ -17,7 +18,7 @@ import com.ntgclarity.smartcompound.common.entity.Employee;
 import com.ntgclarity.smartcompound.portal.base.BaseBean;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class EmployeeBean extends BaseBean implements Serializable {
 
 	@ManagedProperty(value = "#{smartCompoundManagmentImpl}")
@@ -38,9 +39,9 @@ public class EmployeeBean extends BaseBean implements Serializable {
 		initiateNewEmployee();
 	}
 
-	private void initiateNewEmployee() {
+	public Employee initiateNewEmployee() {
 		selectedEmployee = new Employee();
-
+		return selectedEmployee;
 	}
 
 	/**
@@ -50,6 +51,7 @@ public class EmployeeBean extends BaseBean implements Serializable {
 
 	public void createEmployee() {
 
+	
 		smartCompoundManagment.insertEmployee(selectedEmployee);
 		addInfoMessage("Employee has been created successfully");
 
@@ -63,27 +65,28 @@ public class EmployeeBean extends BaseBean implements Serializable {
 
 		loadAllEmployees();
 	}
+	public void getEmployee(String id){
+		selectedEmployee=smartCompoundManagment.getEmployee( Long.parseLong(id));
+		if(selectedEmployee!=null){
+			
+			 System.out.println("found");
+			
+			 RequestContext.getCurrentInstance().execute("PF('foundDialog').show()");
+//			  RequestContext.getCurrentInstance().openDialog("foundDialog");
+		}
+		else{
+			System.out.println("notfound");
+			 RequestContext.getCurrentInstance().execute("PF('notFoundDialog').show()");
+		}
+	}
 
 	public void printEmployee() {
 		System.out.println(selectedEmployee);
 	}
 
-	public void editEmployee() {
-		System.out.println("in edit Emp");
-		if (selectedEmployee != null) {
-			Map<String, Object> options = new HashMap<String, Object>();
-			options.put("resizable", false);
-			options.put("draggable", false);
-			options.put("modal", true);
-
-			RequestContext.getCurrentInstance().openDialog("edit", options,
-					null);
-		}
-	}
-
 	public void updateEmployee() {
 		System.err.println("in Update emp");
-		smartCompoundManagment.saveOrUpdateEmployee(selectedEmployee);
+		smartCompoundManagment.updateEmployee(selectedEmployee);
 		loadAllEmployees();
 	}
 

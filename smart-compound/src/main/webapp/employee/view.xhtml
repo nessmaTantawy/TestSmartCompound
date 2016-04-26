@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head></h:head>
+<body>
+	<h:form id="form">
+		<p:commandButton value="print employee">
+			  <p:ajax event="click"  update=":form:employeeDetail"  oncomplete="PF('employeeDialog').show()" />
+			</p:commandButton>
+		<p:dialog header="Employee Detail" widgetVar="employeeDialog"
+			showEffect="explode" height="100" model="true" resizable="true">
+			<p:outputPanel id="employeeDetail" style="text-align:center;">
+				<p:panelGrid columns="2" cellpadding="5" columnClasses="label,value">
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{employeeBean.selectedEmployee.id}" />
+
+					<h:outputText value="Name:" />
+					<h:outputText value="#{employeeBean.selectedEmployee.name}" />
+
+					<h:outputText value="Department:" />
+					<h:outputText value="#{employeeBean.selectedEmployee.deptId.departmentName}" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+
+</body>
+</html>

@@ -42,9 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDAO.insertEmployee(employee);
 	}
 	@Override
-	public Employee saveOrUpdateEmployee(Employee employee) {
+	public Employee updateEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		return employeeDAO.saveOrUpdateEmployee(employee);
+		return employeeDAO.updateEmployee(employee);
 		
 	}
 
